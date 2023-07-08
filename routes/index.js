@@ -69,5 +69,11 @@ router.post('/deleteTask', function(req, res, next) {
     });
 });
 
+router.post('/api/getName',(req,res)=>{
+  res.json({
+    name:"hello_in_azure"
+  })
+})
+
 
 module.exports = router;
