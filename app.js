@@ -4,6 +4,8 @@ var mongoose = require("mongoose");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+var bodyParser = require("body-parser");
+
 const { format } = require("date-fns");
 
 // 1st party dependencies
@@ -25,6 +27,7 @@ async function getApp() {
   app.set("view engine", "pug");
 
   app.use(logger("dev"));
+  app.use(bodyParser.json());
   app.use(express.json());
   app.use(express.urlencoded({ extended: false }));
   app.use(cookieParser());
