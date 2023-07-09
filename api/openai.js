@@ -5,9 +5,22 @@ const {
 } = require("../chatgpt/index");
 const chatGroups = require("../models/chatGroups.js");
 const roleDescription = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design`;
+const assistantLabel = "Veronica";
+const userLabel = "Mark";
+const roleMap = {
+  assistant: "assistant",
+  user: "user",
+  system: "system",
+};
 
 async function getChatGroups(req, res) {
-  const chatGroupsList = await chatGroups.find();
+  const { id } = req.query;
+  let chatGroupsList;
+  if (!id) {
+    chatGroupsList = await chatGroups.find();
+  } else {
+    chatGroupsList = await chatGroups.findById(id);
+  }
   res.json({
     success: true,
     res: chatGroupsList,
@@ -19,25 +32,89 @@ async function addChatGroups(req, res) {
   await newChatGroups.save();
   res.json({
     success: true,
+    res: newChatGroups,
+  });
+}
+
+async function deleteChatGroups(req, res) {
+  const { id } = req.body;
+  await chatGroups.findByIdAndDelete(id);
+  res.json({
+    success: true,
   });
 }
 
 async function send_request(req, res, next) {
-  const { prompt } = req.body;
-  const reqReceivedTime = new Date().toISOString();
+  const { prompt, is_init, chatGroupId } = req.body;
+  const conversionInfoInit = [
+    { role: roleMap.system, content: roleDescription },
+    { role: roleMap.user, content: "hello" },
+  ];
+  const currentChatGroup = await chatGroups.findById(chatGroupId);
   try {
-    const conversionInfo = [
-      { role: "system", content: roleDescription },
-      { role: "user", content: prompt },
-    ];
-    const completion = await azure_chatapi.getChatCompletions(
-      azure_chat_deployment_name,
-      conversionInfo
-    );
-    res.status(200).json({
-      result: completion,
-      time: reqReceivedTime,
-    });
+    if (is_init) {
+      currentChatGroup.chatMessages.push({
+        role: roleMap.system,
+        message: roleDescription,
+        createAt: new Date(),
+        userName: assistantLabel,
+        reverse: false,
+      });
+      const completion = await azure_chatapi.getChatCompletions(
+        azure_chat_deployment_name,
+        conversionInfoInit
+      );
+      currentChatGroup.chatMessages.push({
+        role: roleMap.assistant,
+        message: completion?.choices?.[0].message.content,
+        createAt: new Date(),
+        userName: assistantLabel,
+        reverse: true,
+      });
+      await currentChatGroup.save();
+      res.status(200).json({
+        success: true,
+        result: completion,
+      });
+    } else {
+      const newMessage = {
+        role: roleMap.user,
+        content: prompt,
+      };
+      const newMessageToDatabase = {
+        role: roleMap.user,
+        message: prompt,
+        createAt: new Date(),
+        userName: userLabel,
+        reverse: false,
+      };
+      const conversionInfo = currentChatGroup.chatMessages.map((chat) => {
+        return {
+          role: chat.role,
+          content: chat.message,
+        };
+      });
+      conversionInfo.push(newMessage);
+      currentChatGroup.chatMessages.push(newMessageToDatabase);
+      await currentChatGroup.save();
+      const completion = await azure_chatapi.getChatCompletions(
+        azure_chat_deployment_name,
+        conversionInfo
+      );
+      const newReplyToDatabase = {
+        role: roleMap.assistant,
+        message: completion?.choices?.[0].message.content,
+        createAt: new Date(completion.created),
+        userName: assistantLabel,
+        reverse: true,
+      };
+      currentChatGroup.chatMessages.push(newReplyToDatabase);
+      await currentChatGroup.save();
+      res.status(200).json({
+        success: true,
+        sentMessages: conversionInfo,
+      });
+    }
   } catch (error) {
     if (error.response) {
       console.error(error.response.status, error.response.data);
@@ -52,4 +129,9 @@ async function send_request(req, res, next) {
     }
   }
 }
-module.exports = { send_request, getChatGroups, addChatGroups };
+module.exports = {
+  send_request,
+  getChatGroups,
+  addChatGroups,
+  deleteChatGroups,
+};

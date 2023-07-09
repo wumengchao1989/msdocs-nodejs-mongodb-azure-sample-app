@@ -14,6 +14,14 @@ const chatMessage = new Schema({
     type: Date,
     required: true,
   },
+  reverse: {
+    type: Boolean,
+    retuired: true,
+  },
+  userName: {
+    type: String,
+    required: true,
+  },
 });
 const chatGroupSchema = new Schema({
   chatGroupTitle: {

@@ -1,7 +1,6 @@
 const { OpenAIClient, AzureKeyCredential } = require("@azure/openai");
 const endpoint = process.env["AZURE_OPENAI_ENDPOINT"];
 const azureApiKey = process.env["AZURE_OPENAI_KEY"];
-
 const azure_chatapi = new OpenAIClient(
   endpoint,
   new AzureKeyCredential(azureApiKey)
