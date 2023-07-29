@@ -33,4 +33,4 @@ const componentPropsSchema = new Schema({
   },
 });
 
-export default mongoose.model("componentProps", componentPropsSchema);
+module.exports = mongoose.model("componentProps", componentPropsSchema);

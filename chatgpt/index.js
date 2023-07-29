@@ -6,8 +6,9 @@ const azure_chatapi = new OpenAIClient(
   new AzureKeyCredential(azureApiKey)
 );
 const azure_chat_deployment_name = "chatdemo";
-
+const azure_embedding_deployment_name = "textembedding";
 module.exports = {
+  azure_embedding_deployment_name,
   azure_chat_deployment_name,
   azure_chatapi,
 };

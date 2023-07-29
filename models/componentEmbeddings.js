@@ -21,4 +21,7 @@ const componentEmbeddingsSchema = new Schema({
   },
 });
 
-export default mongoose.model("componentEmbeddings", componentEmbeddingsSchema);
+module.exports = mongoose.model(
+  "componentEmbeddings",
+  componentEmbeddingsSchema
+);

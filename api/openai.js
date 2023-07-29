@@ -4,14 +4,12 @@ const {
   azure_chatapi,
 } = require("../chatgpt/index");
 const chatGroups = require("../models/chatGroups.js");
-const roleDescription = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design`;
-const assistantLabel = "Veronica";
-const userLabel = "Mark";
-const roleMap = {
-  assistant: "assistant",
-  user: "user",
-  system: "system",
-};
+const {
+  roleMap,
+  assistantLabel,
+  userLabel,
+  roleDescriptionMap
+} = require("../utils/constants");
 
 async function getChatGroups(req, res) {
   const { id } = req.query;
@@ -44,8 +42,9 @@ async function deleteChatGroups(req, res) {
   });
 }
 
-async function send_request(req, res, next) {
+async function send_request(req, res) {
   const { prompt, is_init, chatGroupId } = req.body;
+  const roleDescription = roleDescriptionMap['1'];
   const conversionInfoInit = [
     { role: roleMap.system, content: roleDescription },
     { role: roleMap.user, content: "hello" },
