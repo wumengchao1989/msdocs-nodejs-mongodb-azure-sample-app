@@ -1,0 +1,5 @@
+
+> chat_demo_server@1.0.0 cy:run
+> cypress run --component --project ./project
+
+

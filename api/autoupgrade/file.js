@@ -1,11 +1,3 @@
-/*
- * @Author: LAPTOP-P7G9LM4M\wumen 332982129@qq.com
- * @Date: 2023-07-30 16:02:43
- * @LastEditors: LAPTOP-P7G9LM4M\wumen 332982129@qq.com
- * @LastEditTime: 2023-08-06 20:29:39
- * @FilePath: \chaofun-frontc:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\api\autoupgrade\file.js
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
- */
 const fs = require("fs-extra");
 const path = require("path");
 const projectPath = path.resolve("./project");
@@ -14,7 +6,23 @@ const gitRepoPath = path.resolve("./project");
 const Diff2html = require("diff2html");
 const gitHandler = git(gitRepoPath);
 
-const ignoreList = ["node_modules", "dist", ".vscode", ".angular", ".git"];
+const ignoreList = [
+  "node_modules",
+  "dist",
+  ".vscode",
+  ".angular",
+  ".git",
+  "cypress",
+  "package-lock.json",
+  ".gitignore",
+  ".editorconfig",
+  "cypress.config.ts",
+  "README.md",
+  ".scss",
+  ".html",
+  ".ico",
+  
+];
 
 const getFiles = (filePath) => {
   const fileList = fs.readdirSync(filePath).map((item, index) => {
@@ -51,7 +59,6 @@ const getFileContent = (req, res) => {
       });
     }
   } catch (err) {
-    console.log(err);
     res.json({
       success: false,
       res: err,
@@ -77,4 +84,4 @@ const getDiffHtmlString = async (req, res) => {
   });
 };
 
-module.exports = { getFileList, getFileContent, getDiffHtmlString };
+module.exports = { getFiles, getFileList, getFileContent, getDiffHtmlString };

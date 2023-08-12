@@ -2,7 +2,7 @@
  * @Author: LAPTOP-P7G9LM4M\wumen 332982129@qq.com
  * @Date: 2023-07-08 08:52:22
  * @LastEditors: LAPTOP-P7G9LM4M\wumen 332982129@qq.com
- * @LastEditTime: 2023-08-06 19:27:37
+ * @LastEditTime: 2023-08-12 20:39:47
  * @FilePath: \chaofun-frontc:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\routes\index.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -28,6 +28,11 @@ const {
 
 const { createPrompt } = require("../api/promptCreator");
 const { triggerBuild, getBuildLogs } = require("../api/autoupgrade/build");
+const {
+  getCypressTestLogs,
+  triggerCypressTest,
+} = require("../api/autotest/runtest");
+const { triggerUpgrade } = require("../api/autoupgrade/upgradeCompletion");
 
 router.post("/api/send_request", send_request);
 router.get("/api/get_chat_groups", getChatGroups);
@@ -42,5 +47,7 @@ router.get("/api/autoupgrade/get_file_content", getFileContent);
 router.get("/api/autoupgrade/get_diff_html_string", getDiffHtmlString);
 router.post("/api/autoupgrade/trigger_build", triggerBuild);
 router.get("/api/autoupgrade/get_build_logs", getBuildLogs);
-
+router.get("/api/autotest/get_cypress_test_logs", getCypressTestLogs);
+router.post("/api/autotest/trigger_cypress_test", triggerCypressTest);
+router.post("/api/autoupgrade/trigger_upgrade", triggerUpgrade);
 module.exports = router;

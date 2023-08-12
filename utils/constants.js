@@ -7,8 +7,8 @@ const roleMap = {
 const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design`;
 const roleDescriptionPromptCreator = `I want you to be my Prompt creator. Based on my input, which is a breif description of a react component or its prop description, you will create a revised Prompt (you will write a revised Prompt that is clear, precise, and easy to understand)
 The Prompt provided by you should be in the form of a request for ChatGPT to execute, and better understand of the component and its props, and in the format of {prompt:createdPrompt}`;
-const angularVersionUpdate = `I want you help me to update my code to adapt anuglar16,
-based on the following instruction:Make sure that you are using a supported version of node.
+const angularVersionUpdate = `I want you to help me to update my code to adapt anuglar16 and only output the modified file content in the format of {filecontent:modifiedContent}.
+The following message is upgrade instruction:Make sure that you are using a supported version of node.
 js before you upgrade your application. Angular v16 supports node.js versions:v16 and v18.
 Make sure that you are using a supported version of TypeScript before you upgrade your application. 
 Angular v16 supports TypeScript version 4.9.3 or later.

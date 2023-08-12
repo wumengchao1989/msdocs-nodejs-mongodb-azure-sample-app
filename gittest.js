@@ -1,24 +1,17 @@
-const git = require("simple-git");
+const simpleGit = require("simple-git");
 const path = require("path");
 const gitRepoPath = path.resolve("./project");
 const Diff2html = require("diff2html");
 const { exec } = require("child_process");
 const fs = require("fs");
+const gitClient = simpleGit(gitRepoPath);
 async function test() {
-  const triggerBuild = () => {
-    const logPath = path.resolve(__dirname, "./build_logs/log");
-    const buildLogStream = fs.createWriteStream(logPath);
-    const stream = exec("cd project && npm install && npm run build");
-    stream.stdout.on("open", () => {
-      console.log("open");
-    });
-    stream.stdout.on("data", (data) => {
-      buildLogStream.write(data);
-    });
-    stream.stdout.on("close", () => {
-      buildLogStream.close();
-    });
-  };
-  triggerBuild();
+  await gitClient.checkout("test1");
+  console.log("checkout test1");
+  await gitClient.add("./*");
+  console.log("checkout test1");
+  console.log("add");
+  await gitClient.commit("add: init cypress");
+  console.log("commit finished");
 }
 test();
