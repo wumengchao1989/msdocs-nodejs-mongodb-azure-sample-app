@@ -1,3 +1,11 @@
+/*
+ * @Author: LAPTOP-P7G9LM4M\wumen 332982129@qq.com
+ * @Date: 2023-07-15 15:22:08
+ * @LastEditors: LAPTOP-P7G9LM4M\wumen 332982129@qq.com
+ * @LastEditTime: 2023-08-13 19:26:45
+ * @FilePath: \chaofun-frontc:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\utils\constants.js
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+ */
 const roleMap = {
   assistant: "assistant",
   user: "user",
@@ -7,7 +15,7 @@ const roleMap = {
 const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design`;
 const roleDescriptionPromptCreator = `I want you to be my Prompt creator. Based on my input, which is a breif description of a react component or its prop description, you will create a revised Prompt (you will write a revised Prompt that is clear, precise, and easy to understand)
 The Prompt provided by you should be in the form of a request for ChatGPT to execute, and better understand of the component and its props, and in the format of {prompt:createdPrompt}`;
-const angularVersionUpdate = `I want you to help me to update my code to adapt anuglar16 and only output the modified file content in the format of {filecontent:modifiedContent}.
+const angularVersionUpdate = `I want you to help me to update my code to adapt anuglar16 and only output the modified file content.
 The following message is upgrade instruction:Make sure that you are using a supported version of node.
 js before you upgrade your application. Angular v16 supports node.js versions:v16 and v18.
 Make sure that you are using a supported version of TypeScript before you upgrade your application. 

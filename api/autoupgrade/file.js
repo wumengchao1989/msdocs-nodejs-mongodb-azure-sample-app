@@ -21,26 +21,54 @@ const ignoreList = [
   ".scss",
   ".html",
   ".ico",
-  
+  "assets",
 ];
 
-const getFiles = (filePath) => {
-  const fileList = fs.readdirSync(filePath).map((item, index) => {
-    if (ignoreList.indexOf(item) !== -1) return;
+const getFiles = async (filePath, hasGitStatus) => {
+  const fileList = fs.readdirSync(filePath);
+  const resFileList = [];
+  for (let item of fileList) {
+    if (ignoreList.indexOf(item) !== -1) continue;
     const itemFilePath = path.join(filePath, item);
+    let isModified = false;
     if (fs.lstatSync(itemFilePath).isDirectory()) {
-      return {
+      resFileList.push({
         title: item,
-        children: getFiles(itemFilePath),
+        children: await getFiles(itemFilePath, hasGitStatus),
         key: itemFilePath,
-      };
+      });
+    } else {
+      if (hasGitStatus) {
+        const statusInfo = await gitHandler.status();
+        const modifiedList = statusInfo.modified;
+        for (let modifiedPath of modifiedList) {
+          if (
+            path.resolve(__dirname, "../../", "project", modifiedPath) ===
+            path.resolve(itemFilePath)
+          ) {
+            isModified = true;
+          }
+        }
+        resFileList.push({
+          title: item,
+          isLeaf: true,
+          key: itemFilePath,
+          isModified,
+        });
+      } else {
+        resFileList.push({
+          title: item,
+          isLeaf: true,
+          key: itemFilePath,
+          isModified,
+        });
+      }
     }
-    return { title: item, isLeaf: true, key: itemFilePath };
-  });
-  return fileList;
+  }
+  return resFileList;
 };
-const getFileList = (req, res) => {
-  const fullFileList = getFiles(projectPath);
+const getFileList = async (req, res) => {
+  const fullFileList = await getFiles(projectPath, true);
   res.json({
     success: true,
     res: fullFileList,
@@ -66,11 +94,20 @@ const getFileContent = (req, res) => {
   }
 };
 
+const getGitFileStatus = async (req, res) => {
+  const { path } = req.query;
+  const statusInfo = await gitHandler.status();
+  res.json({
+    success: true,
+    res: {
+      statusInfo,
+    },
+  });
+};
+
 const getDiffHtmlString = async (req, res) => {
   const { path } = req.query;
-  const diff = await gitHandler.diff(
-    path ? ["main", "test1", path] : ["main", "test1"]
-  );
+  const diff = await gitHandler.diff(path ? [path] : ["main", "ai-upgrade"]);
   const diffJson = Diff2html.parse(diff);
   const diffHtml = Diff2html.html(diffJson, {
     drawFileList: true,
@@ -84,4 +121,10 @@ const getDiffHtmlString = async (req, res) => {
   });
 };
 
-module.exports = { getFiles, getFileList, getFileContent, getDiffHtmlString };
+module.exports = {
+  getFiles,
+  getFileList,
+  getFileContent,
+  getDiffHtmlString,
+  getGitFileStatus,
+};

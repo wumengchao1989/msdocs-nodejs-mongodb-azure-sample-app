@@ -24,6 +24,7 @@ const {
   getFileList,
   getFileContent,
   getDiffHtmlString,
+  getGitFileStatus,
 } = require("../api/autoupgrade/file");
 
 const { createPrompt } = require("../api/promptCreator");
@@ -50,4 +51,6 @@ router.get("/api/autoupgrade/get_build_logs", getBuildLogs);
 router.get("/api/autotest/get_cypress_test_logs", getCypressTestLogs);
 router.post("/api/autotest/trigger_cypress_test", triggerCypressTest);
 router.post("/api/autoupgrade/trigger_upgrade", triggerUpgrade);
+router.get("/api/autoupgrade/get_git_file_status", getGitFileStatus);
+
 module.exports = router;
