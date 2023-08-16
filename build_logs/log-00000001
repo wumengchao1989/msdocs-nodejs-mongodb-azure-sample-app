@@ -1,0 +1,44 @@
+
+up to date, audited 935 packages in 6s
+
+107 packages are looking for funding
+  run `npm fund` for details
+
+3 vulnerabilities (1 moderate, 2 high)
+
+To address all issues, run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> angularapp@0.0.0 build
+> ng build
+
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+✔ Browser application bundle generation complete.
+
+Warning: ▲ [WARNING] Comments in CSS use "/* ... */" instead of "//" [js-comment-in-css]
+
+    C:/Users/wumen/Documents/msdocs-nodejs-mongodb-azure-sample-app/project/src/app/app.component.scss:1:18:
+      1 │ /******/ (() => { // webpackBootstrap
+        ╵                   ~~
+
+
+
+Warning: ▲ [WARNING] Unexpected "(" [css-syntax-error]
+
+    C:/Users/wumen/Documents/msdocs-nodejs-mongodb-azure-sample-app/project/src/app/app.component.scss:1:9:
+      1 │ /******/ (() => { // webpackBootstrap
+        ╵          ^
+
+
+
+
+
+Error: Module not found: Error: Can't resolve 'C:/Users/wumen/Documents/msdocs-nodejs-mongodb-azure-sample-app/project/src/app/app.component.scss?ngResource' in 'C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project'
+
+Error: The loader "C:/Users/wumen/Documents/msdocs-nodejs-mongodb-azure-sample-app/project/src/app/app.component.scss" didn't return a string.
+
+
+$$$$$$end$$$$$$

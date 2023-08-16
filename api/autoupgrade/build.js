@@ -8,16 +8,13 @@ const triggerBuild = (req, res) => {
   const stream = exec(
     "cd project && npm install --legacy-peer-deps && npm run build"
   );
-  stream.stderr.on("error", (err) => {
-    console.log(err);
+  stream.stderr.on("data", (data) => {
+    buildLogStream.write(data);
   });
   stream.stdout.on("data", (data) => {
-    console.log("write");
     buildLogStream.write(data);
   });
   stream.stdout.on("close", () => {
-    console.log("close");
-
     buildLogStream.write("$$$$$$end$$$$$$");
     buildLogStream.close();
   });
