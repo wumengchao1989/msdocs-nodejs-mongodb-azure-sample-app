@@ -33,7 +33,10 @@ const {
   getCypressTestLogs,
   triggerCypressTest,
 } = require("../api/autotest/runtest");
-const { triggerUpgrade } = require("../api/autoupgrade/upgradeCompletion");
+const {
+  triggerUpgrade,
+  getUpdateProgress,
+} = require("../api/autoupgrade/upgradeCompletion");
 
 router.post("/api/send_request", send_request);
 router.get("/api/get_chat_groups", getChatGroups);
@@ -52,5 +55,6 @@ router.get("/api/autotest/get_cypress_test_logs", getCypressTestLogs);
 router.post("/api/autotest/trigger_cypress_test", triggerCypressTest);
 router.post("/api/autoupgrade/trigger_upgrade", triggerUpgrade);
 router.get("/api/autoupgrade/get_git_file_status", getGitFileStatus);
+router.get("/api/autoupgrade/get_update_progress", getUpdateProgress);
 
 module.exports = router;

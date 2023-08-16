@@ -5,14 +5,19 @@ const triggerBuild = (req, res) => {
   const id = "00000001";
   const logPath = path.resolve(`./build_logs/log-${id}`);
   const buildLogStream = fs.createWriteStream(logPath);
-  const stream = exec("cd project && npm install && npm run build");
-  stream.stdout.on("open", () => {
-    console.log("open");
+  const stream = exec(
+    "cd project && npm install --legacy-peer-deps && npm run build"
+  );
+  stream.stderr.on("error", (err) => {
+    console.log(err);
   });
   stream.stdout.on("data", (data) => {
+    console.log("write");
     buildLogStream.write(data);
   });
   stream.stdout.on("close", () => {
+    console.log("close");
+
     buildLogStream.write("$$$$$$end$$$$$$");
     buildLogStream.close();
   });

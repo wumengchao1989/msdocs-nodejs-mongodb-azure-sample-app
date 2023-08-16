@@ -5,6 +5,7 @@ const git = require("simple-git");
 const gitRepoPath = path.resolve("./project");
 const Diff2html = require("diff2html");
 const gitHandler = git(gitRepoPath);
+const { keyv } = require("../../utils/keyv_cache");
 
 const ignoreList = [
   "node_modules",
@@ -22,15 +23,23 @@ const ignoreList = [
   ".html",
   ".ico",
   "assets",
+  ".cy.ts",
 ];
 
 const getFiles = async (filePath, hasGitStatus) => {
   const fileList = fs.readdirSync(filePath);
   const resFileList = [];
   for (let item of fileList) {
-    if (ignoreList.indexOf(item) !== -1) continue;
+    let shouldPass = false;
+    for (let ignoreItem of ignoreList) {
+      if (item.indexOf(ignoreItem) !== -1) {
+        shouldPass = true;
+      }
+    }
+    if (shouldPass) continue;
     const itemFilePath = path.join(filePath, item);
     let isModified = false;
+    let isCurrentHandling = false;
     if (fs.lstatSync(itemFilePath).isDirectory()) {
       resFileList.push({
         title: item,
@@ -40,6 +49,7 @@ const getFiles = async (filePath, hasGitStatus) => {
     } else {
       if (hasGitStatus) {
         const statusInfo = await gitHandler.status();
+        const currentHandlingPath = await keyv.get("currentHandling");
         const modifiedList = statusInfo.modified;
         for (let modifiedPath of modifiedList) {
           if (
@@ -49,11 +59,15 @@ const getFiles = async (filePath, hasGitStatus) => {
             isModified = true;
           }
         }
+        if (itemFilePath === currentHandlingPath) {
+          isCurrentHandling = true;
+        }
         resFileList.push({
           title: item,
           isLeaf: true,
           key: itemFilePath,
           isModified,
+          isCurrentHandling,
         });
       } else {
         resFileList.push({
