@@ -40,7 +40,14 @@ async function triggerUpgrade(req, res) {
   await keyv.clear();
   const dfs = async (pathTree) => {
     for await (const item of pathTree) {
-      if (item && item.key && item.isLeaf) {
+      if (
+        item &&
+        item.key &&
+        item.isLeaf &&
+        item.key.indexOf("package.json") !== -1 &&
+        item.key.indexOf("ng-package.json") === -1 &&
+        item.key.indexOf("package-lock.json") === -1
+      ) {
         try {
           await keyv.set("currentHandling", item.key);
           const content = fs.readFileSync(item.key);

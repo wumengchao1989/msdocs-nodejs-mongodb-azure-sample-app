@@ -5,7 +5,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
-
+const blobServiceClient = require("./api/speech2text");
 const { format } = require("date-fns");
 
 // 1st party dependencies

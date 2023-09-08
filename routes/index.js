@@ -37,6 +37,7 @@ const {
   triggerUpgrade,
   getUpdateProgress,
 } = require("../api/autoupgrade/upgradeCompletion");
+const { textToSpeech } = require("../api/text2speech");
 
 router.post("/api/send_request", send_request);
 router.get("/api/get_chat_groups", getChatGroups);
@@ -56,5 +57,6 @@ router.post("/api/autotest/trigger_cypress_test", triggerCypressTest);
 router.post("/api/autoupgrade/trigger_upgrade", triggerUpgrade);
 router.get("/api/autoupgrade/get_git_file_status", getGitFileStatus);
 router.get("/api/autoupgrade/get_update_progress", getUpdateProgress);
+router.get("/api/aiinstructor/texttospeech", textToSpeech);
 
 module.exports = router;

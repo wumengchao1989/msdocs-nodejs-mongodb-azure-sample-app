@@ -12,7 +12,7 @@ const roleMap = {
   system: "system",
 };
 
-const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design`;
+const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design,and for the questions not related to Panda Design, you should reject it.`;
 const roleDescriptionPromptCreator = `I want you to be my Prompt creator. Based on my input, which is a breif description of a react component or its prop description, you will create a revised Prompt (you will write a revised Prompt that is clear, precise, and easy to understand)
 The Prompt provided by you should be in the form of a request for ChatGPT to execute, and better understand of the component and its props, and in the format of {prompt:createdPrompt}`;
 // const angularVersionUpdate = `You are a develop that help to update code to adapt anuglar16 and only output the modified file content.
@@ -93,11 +93,13 @@ const angularVersionUpdate = `Update the code to adapt to Angular 16 and output 
 Please provide the modified file content after making these updates.`;
 const assistantLabel = "Veronica";
 const userLabel = "Mark";
-
+const logAnalyser =
+  "Help me analysis the err logs and if there are packages that has wrong version number,provide the npm package name list array that need to fix. Output in the format of array without any extra instructions.";
 roleDescriptionMap = {
   1: roleDescriptionAssistant,
   2: roleDescriptionPromptCreator,
   3: angularVersionUpdate,
+  4: logAnalyser,
 };
 module.exports = {
   roleMap,
