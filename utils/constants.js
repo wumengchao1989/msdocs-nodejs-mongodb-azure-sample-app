@@ -6,6 +6,8 @@
  * @FilePath: \chaofun-frontc:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\utils\constants.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
+const fs = require("fs");
+const path = require("path");
 const roleMap = {
   assistant: "assistant",
   user: "user",
@@ -15,53 +17,8 @@ const roleMap = {
 const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design,and for the questions not related to Panda Design, you should reject it.`;
 const roleDescriptionPromptCreator = `I want you to be my Prompt creator. Based on my input, which is a breif description of a react component or its prop description, you will create a revised Prompt (you will write a revised Prompt that is clear, precise, and easy to understand)
 The Prompt provided by you should be in the form of a request for ChatGPT to execute, and better understand of the component and its props, and in the format of {prompt:createdPrompt}`;
-// const angularVersionUpdate = `You are a develop that help to update code to adapt anuglar16 and only output the modified file content.
-// The following message is upgrade instruction:Make sure that you are using a supported version of node.
-// nacessary changes according to the instructions below. Angular v16 supports node.js versions:v16 and v18.
-// Make sure that you are using a supported version of TypeScript before you upgrade your application.
-// Angular v16 supports TypeScript version 4.9.3 or later.
-// Make sure that you are using a supported version of Zone.js before you upgrade your application.
-// Angular v16 supports Zone.js version 0.13.x or later.The Event union no longer contains RouterEvent,
-// which means that if you're using the Event type you may have to change the type definition from
-// (e: Event) to (e: Event|RouterEvent) In addition to NavigationEnd the routerEvent property now also
-// accepts type NavigationSkippedPass only flat arrays to RendererType2.styles because it no longer
-// accepts nested arraysYou may have to update tests that use BrowserPlatformLocation because
-// MockPlatformLocation is now provided by default in tests. Read further.
-// Due to the removal of the Angular Compatibility Compiler (ngcc) in v16,
-// projects on v16 and later no longer support View Engine libraries.
-// After bug fixes in Router.createUrlTree you may have to readjust tests which mock ActiveRoute.
-// Read furtherChange imports of ApplicationConfig to be from @angular/core.
-// Revise your code to use renderModule instead of renderModuleFactory because
-// it has been deleted.Revise your code to use XhrFactory from @angular/common
-// instead of XhrFactory export from @angular/common/http.If you're running multiple
-// Angular apps on the same page and you're using BrowserModule.
-// withServerTransition({ appId: 'serverApp' }) make sure you set the APP_ID instead since
-// withServerTransition is now deprecated. Read furtherChange EnvironmentInjector.
-// runInContext to runInInjectionContext and pass the environment injector as the first parameter.
-// Update your code to use ViewContainerRef.createComponent without the factory resolver.
-// ComponentFactoryResolver has been removed from Router APIs.If you bootstrap multiple apps on
-// the same page, make sure you set unique APP_IDs.Update your code to revise renderApplication
-// method as it no longer accepts a root component as first argument, but instead a callback that
-// should bootstrap your app. Read furtherUpdate your code to remove any reference to PlatformConfig.
-// baseUrl and PlatformConfig.useAbsoluteUrl platform-server config options as it has been deprecated.
-// Update your code to remove any reference to @Directive/@Component moduleId property as it
-// does not have any effect and will be removed in v17.Update imports from import {makeStateKey,
-//   StateKey, TransferState} from '@angular/platform-browser' to import {makeStateKey, StateKey,
-//     TransferState} from '@angular/core'If you rely on ComponentRef.setInput to set the component
-//     input even if it's the same based on Object.is equality check, make sure you copy its value.
-//     Update your code to remove any reference to ANALYZE_FOR_ENTRY_COMPONENTS injection token as
-//     it has been deleted.entryComponents is no longer available and any reference to it can be removed
-//      from the @NgModule and @Component public APIs.ngTemplateOutletContext has stricter type
-//      checking which requires you to declare all the properties in the corresponding object.
-//      Read further.Angular packages no longer include FESM2015 and the distributed ECMScript has
-//       been updated from 2020 to 2022.The deprecated EventManager method addGlobalEventListener
-//       has been removed as it is not used by Ivy.BrowserTransferStateModule is no longer available
-//        and any reference to it can be removed from your applications.Update your code to use Injector.
-//        create rather than ReflectiveInjector since ReflectiveInjector is removed.QueryList.filter now
-//        supports type guard functions. Since the type will be narrowed, you may have to update your
-//        application code that relies on the old behavior.`;
-const angularVersionUpdate = `Update the code to adapt to Angular 16 and output the modified file content. Follow the upgrade instructions provided below and only do necessary modification according to the upgrade instruction provided below:
 
+const angularVersionUpdate = `Update the code to adapt to Angular 16 and output the modified file content. Follow the upgrade instructions provided below and only do necessary modification according to the upgrade instruction provided below:
 1. Ensure you're using a supported version of node (v16 or v18).
 2. Update TypeScript to version 4.9.3 or later.
 3. Update Zone.js to version 0.13.x or later.
@@ -90,20 +47,37 @@ const angularVersionUpdate = `Update the code to adapt to Angular 16 and output 
 26. Replace BrowserTransferStateModule references.
 27. Use Injector instead of deprecated methods.
 
-Please provide the modified file content after making these updates.`;
+Please provide only the modified file content after making these updates without any instructions.`;
+const versionListPath = path.resolve("./package-version.json");
+const versionsInfo = fs.readFileSync(versionListPath).toString();
 const assistantLabel = "Veronica";
 const userLabel = "Mark";
 const logAnalyser =
-  "Help me analysis the err logs and if there are packages that has wrong version number,provide the npm package name list array that need to fix. Output in the format of array without any extra instructions.";
-roleDescriptionMap = {
+  "Help me analysis the err logs and if there are packages that has wrong version number,provide the npm package name list array that need to fix. Only output the name of package in the format of array without any extra instructions.";
+
+const npmVersionFix =
+  "Help me fix the version of package in the package.json according to the version list, and provide the modified file content after making these updates. ";
+const roleDescriptionMap = {
   1: roleDescriptionAssistant,
   2: roleDescriptionPromptCreator,
   3: angularVersionUpdate,
   4: logAnalyser,
+  5: npmVersionFix,
 };
+
+const phaseMap = {
+  updateFile: "0",
+  npmInstall: "1",
+  build: "2",
+  test: "3",
+  finished: "4",
+};
+
 module.exports = {
   roleMap,
   assistantLabel,
   userLabel,
   roleDescriptionMap,
+  versionsInfo,
+  phaseMap,
 };

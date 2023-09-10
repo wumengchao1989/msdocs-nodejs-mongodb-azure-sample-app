@@ -2,7 +2,11 @@ const {
   azure_chat_deployment_name,
   azure_chatapi,
 } = require("../../chatgpt/index");
-const { roleMap, roleDescriptionMap } = require("../../utils/constants");
+const {
+  roleMap,
+  roleDescriptionMap,
+  versionsInfo,
+} = require("../../utils/constants");
 const path = require("path");
 const { getFiles } = require("./file");
 const fs = require("fs");
@@ -13,6 +17,10 @@ async function getChatCompletions(filecontent) {
   const roleDescription = roleDescriptionMap["3"];
   const conversionInfo = [
     { role: roleMap.system, content: roleDescription },
+    {
+      role: roleMap.system,
+      content: `Here is the package version list:${versionsInfo},you should only select available package version from the list.`,
+    },
     { role: roleMap.user, content: filecontent },
   ];
   const completion = await azure_chatapi.getChatCompletions(
@@ -26,7 +34,9 @@ async function getUpdateProgress(req, res) {
   const updatedFileList = [];
   for await (const [key, value] of keyv.iterator()) {
     const fileInfo = { key, value };
-    if (key !== "currentHandling") updatedFileList.push(fileInfo);
+    if (key !== "currentHandling" && key !== "progressPhase") {
+      updatedFileList.push(fileInfo);
+    }
   }
   res.json({
     success: true,
@@ -35,27 +45,32 @@ async function getUpdateProgress(req, res) {
     },
   });
 }
+function sleep(time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
+}
 async function triggerUpgrade(req, res) {
   const filePathTree = await getFiles(path.resolve("./project"));
   await keyv.clear();
+  await keyv.set("progressPhase", "0");
   const dfs = async (pathTree) => {
     for await (const item of pathTree) {
-      if (
-        item &&
-        item.key &&
-        item.isLeaf &&
-        item.key.indexOf("package.json") !== -1 &&
-        item.key.indexOf("ng-package.json") === -1 &&
-        item.key.indexOf("package-lock.json") === -1
-      ) {
+      if (item && item.key && item.isLeaf) {
         try {
           await keyv.set("currentHandling", item.key);
           const content = fs.readFileSync(item.key);
-          console.log("completion start", item.key);
-          const res = await getChatCompletions(content.toString());
-          console.log("completion end", item.key);
-          const modifiedFileContent = res.choices[0].message.content;
-          fs.writeFileSync(item.key, modifiedFileContent);
+          if (
+            item.key.indexOf("package.json") !== -1 &&
+            item.key.indexOf("ng-package.json") === -1 &&
+            item.key.indexOf("package-lock.json") === -1
+          ) {
+            const res = await getChatCompletions(content.toString());
+            const modifiedFileContent = res.choices[0].message.content;
+            fs.writeFileSync(item.key, modifiedFileContent);
+          } //else {
+          //   await sleep(6000);
+          //   if (item.key.indexOf("json") === -1)
+          //     fs.writeFileSync(item.key, "//ai modified \n" + content);
+          // }
           await keyv.set("currentHandling", "");
           await keyv.set(item.key, dayjs().format("YYYY-MM-DD HH:mm:ss"));
         } catch (err) {
@@ -67,6 +82,7 @@ async function triggerUpgrade(req, res) {
         }
       }
     }
+    await keyv.set("progressPhase", "1");
   };
   dfs(filePathTree);
 

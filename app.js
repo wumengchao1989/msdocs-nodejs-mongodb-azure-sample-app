@@ -5,13 +5,12 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var bodyParser = require("body-parser");
-const blobServiceClient = require("./api/speech2text");
 const { format } = require("date-fns");
-
+const { keyv } = require("./utils/keyv_cache");
 // 1st party dependencies
 var configData = require("./config/connection");
 var indexRouter = require("./routes/index");
-
+keyv.clear();
 async function getApp() {
   // Database
   var connectionInfo = await configData.getConnectionInfo();

@@ -28,7 +28,13 @@ const {
 } = require("../api/autoupgrade/file");
 
 const { createPrompt } = require("../api/promptCreator");
-const { triggerBuild, getBuildLogs } = require("../api/autoupgrade/build");
+const {
+  triggerBuild,
+  getBuildLogs,
+  getInstallLogs,
+  triggerInstall,
+  get_progress_phase,
+} = require("../api/autoupgrade/build");
 const {
   getCypressTestLogs,
   triggerCypressTest,
@@ -58,5 +64,8 @@ router.post("/api/autoupgrade/trigger_upgrade", triggerUpgrade);
 router.get("/api/autoupgrade/get_git_file_status", getGitFileStatus);
 router.get("/api/autoupgrade/get_update_progress", getUpdateProgress);
 router.get("/api/aiinstructor/texttospeech", textToSpeech);
+router.get("/api/autoupgrade/get_install_logs", getInstallLogs);
+router.post("/api/autoupgrade/trigger_install", triggerInstall);
+router.get("/api/autoupgrade/get_progress_phase", get_progress_phase);
 
 module.exports = router;
