@@ -59,7 +59,8 @@ async function triggerUpgrade(req, res) {
           await keyv.set("currentHandling", item.key);
           const content = fs.readFileSync(item.key);
           if (
-            item.key.indexOf("package.json") !== -1 &&
+            (item.key.indexOf("package.json") !== -1 ||
+              item.key.indexOf("button") !== -1) &&
             item.key.indexOf("ng-package.json") === -1 &&
             item.key.indexOf("package-lock.json") === -1
           ) {

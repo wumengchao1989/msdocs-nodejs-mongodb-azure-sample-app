@@ -80,11 +80,13 @@ const triggerBuild = (req, res) => {
 };
 
 const getBuildLogs = (req, res) => {
+  const errlogPath = path.resolve(`./build_logs/log-err-${id}`);
   const logPath = path.resolve(`./build_logs/log-${id}`);
   const fileContent = fs.readFileSync(logPath);
+  const fileErrContent = fs.readFileSync(errlogPath);
   res.json({
     success: true,
-    res: { buildLogs: fileContent.toString() },
+    res: { buildLogs: fileContent.toString()+fileErrContent.toString() },
   });
 };
 

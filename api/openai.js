@@ -323,7 +323,7 @@ async function send_request(req, res) {
     {
       role: roleMap.user,
       content:
-        "Hello, tell me who are you and what is Panda Design and how to get started with it?",
+        "Hello, tell me who are you, what is Panda Design and list what you can do to help user use Panda Design",
     },
   ];
   const currentChatGroup = await chatGroups.findById(chatGroupId);
