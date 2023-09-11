@@ -320,10 +320,13 @@ async function send_request(req, res) {
   const roleDescription = roleDescriptionMap["1"];
   const conversionInfoInit = [
     { role: roleMap.system, content: roleDescription },
-    { role: roleMap.user, content: "hello" },
+    {
+      role: roleMap.user,
+      content:
+        "Hello, tell me who are you and what is Panda Design and how to get started with it?",
+    },
   ];
   const currentChatGroup = await chatGroups.findById(chatGroupId);
-  console.log(currentChatGroup);
   try {
     if (is_init) {
       currentChatGroup.chatMessages.push({

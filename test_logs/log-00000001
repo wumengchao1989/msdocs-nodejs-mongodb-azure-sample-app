@@ -3,6 +3,29 @@
 > cypress run --component --project ./project
 
 
+asset [1m[32mcypress-support-file.js[39m[22m 14.4 MiB {[1m[33mcypress-support-file[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-support-file)
+asset [1m[32mpolyfills.js[39m[22m 4.93 MiB {[1m[33mpolyfills[39m[22m} [1m[32m[emitted][39m[22m (name: polyfills)
+asset [1m[32mcypress-entry.js[39m[22m 748 KiB {[1m[33mcypress-entry[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-entry)
+asset [1m[32mstyles.js[39m[22m 739 KiB {[1m[33mstyles[39m[22m} [1m[32m[emitted][39m[22m (name: styles)
+asset [1m[32mruntime.js[39m[22m 31.2 KiB {[1m[33mruntime[39m[22m} [1m[32m[emitted][39m[22m (name: runtime)
+asset [1m[32mspec-0.js[39m[22m 2.18 KiB {[1m[33mspec-0[39m[22m} [1m[32m[emitted][39m[22m (name: spec-0)
+asset [1m[32mstyles.css[39m[22m 1.1 KiB {[1m[33mstyles[39m[22m} [1m[32m[emitted][39m[22m (name: styles)
+asset [1m[32mindex.html[39m[22m 645 bytes [1m[32m[emitted][39m[22m
+Entrypoint [1mpolyfills[39m[22m 4.96 MiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mpolyfills.js[39m[22m 4.93 MiB
+Entrypoint [1mcypress-entry[39m[22m 779 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mcypress-entry.js[39m[22m 748 KiB
+Entrypoint [1mstyles[39m[22m 771 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mstyles.css[39m[22m 1.1 KiB [1m[32mstyles.js[39m[22m 739 KiB
+chunk {[1m[33mcypress-entry[39m[22m} (runtime: runtime) [1m[32mcypress-entry.js[39m[22m (cypress-entry) 214 KiB [1m[33m[initial][39m[22m
+chunk {[1m[33mcypress-support-file[39m[22m} (runtime: runtime) [1m[32mcypress-support-file.js[39m[22m (cypress-support-file) 4.05 MiB
+chunk {[1m[33mpolyfills[39m[22m} (runtime: runtime) [1m[32mpolyfills.js[39m[22m (polyfills) 1.31 MiB [1m[33m[initial][39m[22m
+chunk {[1m[33mruntime[39m[22m} (runtime: runtime) [1m[32mruntime.js[39m[22m (runtime) 8.7 KiB [1m[33m[entry][39m[22m
+chunk {[1m[33mspec-0[39m[22m} (runtime: runtime) [1m[32mspec-0.js[39m[22m (spec-0) 605 bytes
+chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[22m, [1m[32mstyles.js[39m[22m (styles) 212 KiB (javascript) 0 bytes (css/mini-extract) [1m[33m[initial][39m[22m
+
+[1m[31mERROR[39m[22m in [91merror[0m[90m TS2688: [0mCannot find type definition file for 'cypress'.
+  The file is in the program because:
+    Entry point of type library 'cypress' specified in compilerOptions
+
+2023-09-10 [1m23:26:20[39m[22m: webpack compiled in 8620 ms (3da18c410dd85248)
 
 ====================================================================================================
 
@@ -11,7 +34,7 @@
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ Cypress:        12.17.3                                                                        │
   │ Browser:        Electron 106 (headless)                                                        │
-  │ Node Version:   v20.5.0 (C:\Program Files\nodejs\node.exe)                                     │
+  │ Node Version:   v18.17.1 (C:\Program Files\nodejs\node.exe)                                    │
   │ Specs:          1 found (app.cy.ts)                                                            │
   │ Searched:       **/*.cy.ts                                                                     │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
@@ -20,159 +43,34 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
                                                                                                     
   Running:  app.cy.ts                                                                       (1 of 1)
-asset [1m[32mcypress-support-file.js[39m[22m 13.5 MiB {[1m[33mcypress-support-file[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-support-file)
-asset [1m[32mpolyfills.js[39m[22m 1.04 MiB {[1m[33mpolyfills[39m[22m} [1m[32m[emitted][39m[22m (name: polyfills)
-asset [1m[32mcypress-entry.js[39m[22m 684 KiB {[1m[33mcypress-entry[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-entry)
-asset [1m[32mruntime.js[39m[22m 31.2 KiB {[1m[33mruntime[39m[22m} [1m[32m[emitted][39m[22m (name: runtime)
-asset [1m[32mspec-0.js[39m[22m 2.18 KiB {[1m[33mspec-0[39m[22m} [1m[32m[emitted][39m[22m (name: spec-0)
-asset [1m[32mindex.html[39m[22m 527 bytes [1m[32m[emitted][39m[22m
-Entrypoint [1mpolyfills[39m[22m 1.07 MiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mpolyfills.js[39m[22m 1.04 MiB
-Entrypoint [1mcypress-entry[39m[22m 715 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mcypress-entry.js[39m[22m 684 KiB
-chunk {[1m[33mcypress-entry[39m[22m} (runtime: runtime) [1m[32mcypress-entry.js[39m[22m (cypress-entry) 197 KiB [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
-chunk {[1m[33mcypress-support-file[39m[22m} (runtime: runtime) [1m[32mcypress-support-file.js[39m[22m (cypress-support-file) 3.78 MiB [1m[32m[rendered][39m[22m
-chunk {[1m[33mpolyfills[39m[22m} (runtime: runtime) [1m[32mpolyfills.js[39m[22m (polyfills) 298 KiB [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
-chunk {[1m[33mruntime[39m[22m} (runtime: runtime) [1m[32mruntime.js[39m[22m (runtime) 8.7 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
-chunk {[1m[33mspec-0[39m[22m} (runtime: runtime) [1m[32mspec-0.js[39m[22m (spec-0) 605 bytes [1m[32m[rendered][39m[22m
-
-[1m[31mERROR[39m[22m in [1m../node_modules/@angular/common/fesm2022/common.mjs[39m[22m
-[1mModule build [1m[31mfailed[39m[22m[1m (from ./node_modules/@angular-devkit/build-angular/src/babel/webpack-loader.js):
-TypeError: Cannot create property 'message' on string 'C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\node_modules\@angular\common\fesm2022\common.mjs: Unsupported syntax, expected a string literal.
-  6274 |     }
-  6275 |     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.0", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-> 6276 |     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.2.0", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: "ngSrc", ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0px\" : null" } }, usesOnChanges: true, ngImport: i0 }); }
-       |                                                                                                                                                                                                                                                           ^^^^^^^^^^^^^^^
-  6277 | }
-  6278 | i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.0", ngImport: i0, type: NgOptimizedImage, decorators: [{
-  6279 |             type: Directive,'
-    at run (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\transformation\index.ts:49:14)
-    at run.next (<anonymous>)
-    at transform (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\transform.ts:29:20)
-    at transform.next (<anonymous>)
-    at step (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:261:32)
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:273:13
-    at async.call.result.err.err (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:223:11)
-    at cb (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:189:28)
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\gensync-utils\async.ts:90:7
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:113:33
-    at step (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:287:14)
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:273:13
-    at async.call.result.err.err (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:223:11)[39m[22m
-
-[1m[31mERROR[39m[22m in [91merror[0m[90m TS2688: [0mCannot find type definition file for 'cypress'.
-  The file is in the program because:
-    Entry point of type library 'cypress' specified in compilerOptions
-
-[1m[31mERROR[39m[22m in [1mCan't resolve 'src/styles.scss' in 'C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project'[39m[22m
-
-2023-08-14 [1m15:02:48[39m[22m: webpack compiled in 30645 ms (6166034014a40b8b)
 
 
-  1) An uncaught error was detected outside of a test
-
-  0 passing (593ms)
-  1 failing
-
-  1) An uncaught error was detected outside of a test:
-     The following error originated from your test code, not from Cypress.
-
-  > Module build failed (from ./node_modules/@angular-devkit/build-angular/src/babel/webpack-loader.js):
-TypeError: Cannot create property 'message' on string 'C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\node_modules\@angular\common\fesm2022\common.mjs: Unsupported syntax, expected a string literal.
-  6274 |     }
-  6275 |     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.0", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-> 6276 |     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.2.0", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: "ngSrc", ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0px\" : null" } }, usesOnChanges: true, ngImport: i0 }); }
-       |                                                                                                                                                                                                                                                           ^^^^^^^^^^^^^^^
-  6277 | }
-  6278 | i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.0", ngImport: i0, type: NgOptimizedImage, decorators: [{
-  6279 |             type: Directive,'
-    at run (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\transformation\index.ts:49:14)
-    at run.next (<anonymous>)
-    at transform (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\transform.ts:29:20)
-    at transform.next (<anonymous>)
-    at step (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:261:32)
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:273:13
-    at async.call.result.err.err (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:223:11)
-    at cb (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:189:28)
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\gensync-utils\async.ts:90:7
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:113:33
-    at step (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:287:14)
-    at C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:273:13
-    at async.call.result.err.err (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:223:11)
-
-When Cypress detects uncaught errors originating from your test code it will automatically fail the current test.
-
-Cypress could not associate this error to any specific test.
-
-We dynamically generated a new test to display this failure.
-  Error: The following error originated from your test code, not from Cypress.
-  
-    > Module build failed (from ./node_modules/@angular-devkit/build-angular/src/babel/webpack-loader.js):
-  TypeError: Cannot create property 'message' on string 'C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\node_modules\@angular\common\fesm2022\common.mjs: Unsupported syntax, expected a string literal.
-    6274 |     }
-    6275 |     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.0", ngImport: i0, type: NgOptimizedImage, deps: [], target: i0.ɵɵFactoryTarget.Directive }); }
-  > 6276 |     static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.2.0", type: NgOptimizedImage, isStandalone: true, selector: "img[ngSrc]", inputs: { ngSrc: "ngSrc", ngSrcset: "ngSrcset", sizes: "sizes", width: ["width", "width", numberAttribute], height: ["height", "height", numberAttribute], loading: "loading", priority: ["priority", "priority", booleanAttribute], loaderParams: "loaderParams", disableOptimizedSrcset: ["disableOptimizedSrcset", "disableOptimizedSrcset", booleanAttribute], fill: ["fill", "fill", booleanAttribute], src: "src", srcset: "srcset" }, host: { properties: { "style.position": "fill ? \"absolute\" : null", "style.width": "fill ? \"100%\" : null", "style.height": "fill ? \"100%\" : null", "style.inset": "fill ? \"0px\" : null" } }, usesOnChanges: true, ngImport: i0 }); }
-         |                                                                                                                                                                                                                                                           ^^^^^^^^^^^^^^^
-    6277 | }
-    6278 | i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.0", ngImport: i0, type: NgOptimizedImage, decorators: [{
-    6279 |             type: Directive,'
-      at run (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\transformation\index.ts:49:14)
-  at run.next (<anonymous>)
-      at transform (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\transform.ts:29:20)
-  at transform.next (<anonymous>)
-      at step (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:261:32)
-      at <unknown> (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:273:13)
-      at async.call.result.err.err (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:223:11)
-      at cb (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:189:28)
-      at <unknown> (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\@babel\core\src\gensync-utils\async.ts:90:7)
-      at <unknown> (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:113:33)
-      at step (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:287:14)
-      at <unknown> (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:273:13)
-      at async.call.result.err.err (C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\node_modules\gensync\index.js:223:11)
-  
-  When Cypress detects uncaught errors originating from your test code it will automatically fail the current test.
-  
-  Cypress could not associate this error to any specific test.
-  
-  We dynamically generated a new test to display this failure.
-      at 6568 (http://localhost:8082/__cypress/src/cypress-support-file.js:14399:7)
-      at __webpack_require__ (http://localhost:8082/__cypress/src/runtime.js:23:42)
-      at 6039 (http://localhost:8082/__cypress/src/cypress-support-file.js:105:73)
-      at __webpack_require__ (http://localhost:8082/__cypress/src/runtime.js:23:42)
-      at 9842 (http://localhost:8082/__cypress/src/cypress-support-file.js:62:73)
-      at Function.__webpack_require__ (http://localhost:8082/__cypress/src/runtime.js:23:42)
-      at _ZoneDelegate.invoke (http://localhost:8082/__cypress/src/polyfills.js:7570:158)
-      at Zone.run (http://localhost:8082/__cypress/src/polyfills.js:7352:35)
-      at <unknown> (http://localhost:8082/__cypress/src/polyfills.js:8431:28)
-      at _ZoneDelegate.invokeTask (http://localhost:8082/__cypress/src/polyfills.js:7597:171)
+  My First Test
+    √ Does not do much! (64ms)
 
 
+  1 passing (102ms)
 
 
   (Results)
 
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
   │ Tests:        1                                                                                │
-  │ Passing:      0                                                                                │
-  │ Failing:      1                                                                                │
+  │ Passing:      1                                                                                │
+  │ Failing:      0                                                                                │
   │ Pending:      0                                                                                │
   │ Skipped:      0                                                                                │
-  │ Screenshots:  1                                                                                │
+  │ Screenshots:  0                                                                                │
   │ Video:        true                                                                             │
   │ Duration:     0 seconds                                                                        │
   │ Spec Ran:     app.cy.ts                                                                        │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
 
 
-  (Screenshots)
-
-  -  C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\cypress\     (1280x720)
-     screenshots\app.cy.ts\An uncaught error was detected outside of a test (failed).               
-     png                                                                                            
-
-
   (Video)
 
   -  Started compressing: Compressing to 32 CRF                                                     
-  -  Finished compressing: 3 seconds                                                 
+  -  Finished compressing: 1 second                                                  
 
   -  Video output: C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\cypress\videos\app.cy.ts.mp4
 
@@ -184,8 +82,7 @@ We dynamically generated a new test to display this failure.
 
        Spec                                              Tests  Passing  Failing  Pending  Skipped  
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ ×  app.cy.ts                                588ms        1        -        1        -        - │
+  │ √  app.cy.ts                                 97ms        1        1        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    ×  1 of 1 failed (100%)                     588ms        1        -        1        -        -  
+    √  All specs passed!                         97ms        1        1        -        -        -  
 
-$$$$$$end$$$$$$

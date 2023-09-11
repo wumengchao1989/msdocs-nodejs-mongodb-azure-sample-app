@@ -52,7 +52,7 @@ async function triggerUpgrade(req, res) {
   const filePathTree = await getFiles(path.resolve("./project"));
   await keyv.clear();
   await keyv.set("progressPhase", "0");
-  const dfs = async (pathTree) => {
+  const dfs = async (pathTree, level) => {
     for await (const item of pathTree) {
       if (item && item.key && item.isLeaf) {
         try {
@@ -66,11 +66,11 @@ async function triggerUpgrade(req, res) {
             const res = await getChatCompletions(content.toString());
             const modifiedFileContent = res.choices[0].message.content;
             fs.writeFileSync(item.key, modifiedFileContent);
-          } //else {
-          //   await sleep(6000);
-          //   if (item.key.indexOf("json") === -1)
-          //     fs.writeFileSync(item.key, "//ai modified \n" + content);
-          // }
+          } else {
+            await sleep(2000);
+            if (item.key.indexOf("json") === -1)
+              fs.writeFileSync(item.key, "//ai checked \n" + content);
+          }
           await keyv.set("currentHandling", "");
           await keyv.set(item.key, dayjs().format("YYYY-MM-DD HH:mm:ss"));
         } catch (err) {
@@ -78,13 +78,13 @@ async function triggerUpgrade(req, res) {
         }
       } else {
         if (item.children && item.children.length !== 0) {
-          await dfs(item.children);
+          await dfs(item.children, level + 1);
         }
       }
     }
-    await keyv.set("progressPhase", "1");
+    if (level === 0) await keyv.set("progressPhase", "1");
   };
-  dfs(filePathTree);
+  dfs(filePathTree, 0);
 
   try {
     res.json({

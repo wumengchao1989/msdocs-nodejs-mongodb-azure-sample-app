@@ -6,26 +6,33 @@ const id = "00000001";
 
 const logPath = path.resolve(`./build_logs/log-${id}`);
 const errLogPath = path.resolve(`./build_logs/log-err-${id}`);
+const installLogPath = path.resolve(`./build_logs/install-log-${id}`);
+const installErrLogPath = path.resolve(`./build_logs/install-log-err-${id}`);
 const buildLogStream = fs.createWriteStream(logPath);
 const errLogStream = fs.createWriteStream(errLogPath);
+const installLogStream = fs.createWriteStream(installLogPath);
+const installErrLogStream = fs.createWriteStream(installErrLogPath);
 const { keyv } = require("../../utils/keyv_cache");
 const { phaseMap } = require("../../utils/constants");
 
 const triggerInstall = (req, res) => {
-  const stream = exec("cd project && npm install --legacy-peer-deps");
+  fs.writeFileSync(installLogPath, "");
+  fs.writeFileSync(installErrLogPath, "");
+  const stream = exec(
+    "cd project && npm install --legacy-peer-deps --loglevel verbose"
+  );
   stream.stderr.on("data", (data) => {
-    errLogStream.write(data);
+    installErrLogStream.write(data);
   });
   stream.stdout.on("data", (data) => {
-    buildLogStream.write(data);
+    installLogStream.write(data);
   });
   stream.stdout.on("close", async () => {
-    buildLogStream.write("$$$$$$end$$$$$$");
-    buildLogStream.close();
+    installLogStream.close();
     await keyv.set("progressPhase", phaseMap["build"]);
   });
   stream.stderr.on("close", async () => {
-    errLogStream.close();
+    installErrLogStream.close();
     await keyv.set("progressPhase", phaseMap["build"]);
   });
 
@@ -39,17 +46,17 @@ const triggerInstall = (req, res) => {
 
 const getInstallLogs = (req, res) => {
   const logPath = path.resolve(`./build_logs/install-log-${id}`);
+  const errlogPath = path.resolve(`./build_logs/install-log-err-${id}`);
   const fileContent = fs.readFileSync(logPath);
+  const fileErrContent = fs.readFileSync(errlogPath);
   res.json({
     success: true,
-    res: { buildLogs: fileContent.toString() },
+    res: { installLogs: fileErrContent.toString() + fileContent.toString() },
   });
 };
 
 const triggerBuild = (req, res) => {
-  const stream = exec(
-    "cd project && npm install --legacy-peer-deps && npm run build"
-  );
+  const stream = exec("cd project && npm run build");
   stream.stderr.on("data", (data) => {
     errLogStream.write(data);
   });
@@ -57,7 +64,6 @@ const triggerBuild = (req, res) => {
     buildLogStream.write(data);
   });
   stream.stdout.on("close", async () => {
-    buildLogStream.write("$$$$$$end$$$$$$");
     buildLogStream.close();
     await keyv.set("progressPhase", phaseMap["test"]);
   });
