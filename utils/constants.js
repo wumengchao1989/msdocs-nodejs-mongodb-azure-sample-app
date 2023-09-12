@@ -14,7 +14,7 @@ const roleMap = {
   system: "system",
 };
 
-const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design,and for the questions not related to Panda Design, you should reject it.`;
+const roleDescriptionAssistant = `Your name is Veronica, you are an assistant that can help customer using Panda Design. You can tell customers about how to use components in Panda Design,and for the questions not related to Panda Design, you should reject it.When responding to the following prompt, please make sure to properly style your response using Github Flavored Markdown. Use markdown syntax for things like headings, lists, colored text, code blocks, highlights etc. Make sure not to mention markdown or styling in your actual response`;
 const roleDescriptionPromptCreator = `I want you to be my Prompt creator. Based on my input, which is a breif description of a react component or its prop description, you will create a revised Prompt (you will write a revised Prompt that is clear, precise, and easy to understand)
 The Prompt provided by you should be in the form of a request for ChatGPT to execute, and better understand of the component and its props, and in the format of {prompt:createdPrompt}`;
 
@@ -23,29 +23,8 @@ const angularVersionUpdate = `Update the code to adapt to Angular 16 and output 
 2. Update TypeScript to version 4.9.3 or later.
 3. Update Zone.js to version 0.13.x or later.
 4. Adjust type definitions: Change (e: Event) to (e: Event|RouterEvent).
-5. Modify RouterEvent usage: Use NavigationSkippedPass in addition to NavigationEnd.
-6. Change RendererType2.styles to accept only flat arrays, no longer nested arrays.
-7. Update tests using BrowserPlatformLocation, as MockPlatformLocation is now provided by default.
-8. Remove references to View Engine libraries due to the removal of Angular Compatibility Compiler (ngcc).
-9. Adjust tests that mock ActiveRoute due to bug fixes in Router.createUrlTree.
-10. Change imports of ApplicationConfig to be from @angular/core.
-11. Use renderModule instead of renderModuleFactory.
-12. Use XhrFactory from @angular/common instead of XhrFactory export from @angular/common/http.
-13. Update BrowserModule usage withServerTransition({ appId: 'serverApp' }) to set APP_ID explicitly.
-14. Replace EnvironmentInjector.runInContext with runInInjectionContext, passing environment injector as first parameter.
-15. Update ViewContainerRef.createComponent to not use ComponentFactoryResolver, which has been removed from Router APIs.
-16. Set unique APP_IDs when bootstrapping multiple apps on the same page.
-17. Update renderApplication method to use a callback instead of a root component as its first argument.
-18. Remove references to PlatformConfig.baseUrl and PlatformConfig.useAbsoluteUrl as they are deprecated.
-19. Remove @Directive/@Component moduleId property references.
-20. Update imports from '@angular/platform-browser' to '@angular/core' for makeStateKey, StateKey, and TransferState.
-21. Copy the value when using ComponentRef.setInput for component inputs based on Object.is equality check.
-22. Remove any reference to ANALYZE_FOR_ENTRY_COMPONENTS injection token.
-23. Adjust ngTemplateOutletContext properties to adhere to stricter type checking.
-24. Update Angular packages due to changes in FESM2015 and ES modules.
-25. Remove deprecated EventManager method addGlobalEventListener.
-26. Replace BrowserTransferStateModule references.
-27. Use Injector instead of deprecated methods.
+5. Update imports from '@angular/platform-browser' to '@angular/core' for makeStateKey, StateKey, and TransferState.
+
 
 Please provide only the modified file content after making these updates without any instructions.`;
 const versionListPath = path.resolve("./package-version.json");
@@ -63,6 +42,7 @@ const roleDescriptionMap = {
   3: angularVersionUpdate,
   4: logAnalyser,
   5: npmVersionFix,
+  6: "You are an instructor that help people learning and researching.When responding to the following prompt, please make sure to properly style your response using Github Flavored Markdown. Use markdown syntax for things like headings, lists, colored text, code blocks, highlights etc. Make sure not to mention markdown or styling in your actual response",
 };
 
 const phaseMap = {

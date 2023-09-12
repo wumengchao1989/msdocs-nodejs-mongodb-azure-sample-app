@@ -6,6 +6,6 @@ const AZURE_STORAGE_CONNECTION_STRING =
 const blobServiceClient = BlobServiceClient.fromConnectionString(
   AZURE_STORAGE_CONNECTION_STRING
 );
-const containerClient = blobServiceClient.getContainerClient("poccontainer");
+const containerClient = blobServiceClient.getContainerClient("voice");
 
 module.exports = { containerClient };

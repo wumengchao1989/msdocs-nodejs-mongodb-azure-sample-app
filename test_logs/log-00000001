@@ -3,6 +3,55 @@
 > cypress run --component --project ./project
 
 
+asset [1m[32mcypress-support-file.js[39m[22m 14.4 MiB {[1m[33mcypress-support-file[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-support-file)
+asset [1m[32mpolyfills.js[39m[22m 4.93 MiB {[1m[33mpolyfills[39m[22m} [1m[32m[emitted][39m[22m (name: polyfills)
+asset [1m[32mcypress-entry.js[39m[22m 748 KiB {[1m[33mcypress-entry[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-entry)
+asset [1m[32mstyles.js[39m[22m 739 KiB {[1m[33mstyles[39m[22m} [1m[32m[emitted][39m[22m (name: styles)
+asset [1m[32mruntime.js[39m[22m 31.2 KiB {[1m[33mruntime[39m[22m} [1m[32m[emitted][39m[22m (name: runtime)
+asset [1m[32mspec-0.js[39m[22m 2.18 KiB {[1m[33mspec-0[39m[22m} [1m[32m[emitted][39m[22m (name: spec-0)
+asset [1m[32mstyles.css[39m[22m 1.1 KiB {[1m[33mstyles[39m[22m} [1m[32m[emitted][39m[22m (name: styles)
+asset [1m[32mindex.html[39m[22m 645 bytes [1m[32m[emitted][39m[22m
+Entrypoint [1mpolyfills[39m[22m 4.96 MiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mpolyfills.js[39m[22m 4.93 MiB
+Entrypoint [1mcypress-entry[39m[22m 779 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mcypress-entry.js[39m[22m 748 KiB
+Entrypoint [1mstyles[39m[22m 771 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mstyles.css[39m[22m 1.1 KiB [1m[32mstyles.js[39m[22m 739 KiB
+chunk {[1m[33mcypress-entry[39m[22m} (runtime: runtime) [1m[32mcypress-entry.js[39m[22m (cypress-entry) 214 KiB [1m[33m[initial][39m[22m
+chunk {[1m[33mcypress-support-file[39m[22m} (runtime: runtime) [1m[32mcypress-support-file.js[39m[22m (cypress-support-file) 4.05 MiB
+chunk {[1m[33mpolyfills[39m[22m} (runtime: runtime) [1m[32mpolyfills.js[39m[22m (polyfills) 1.31 MiB [1m[33m[initial][39m[22m
+chunk {[1m[33mruntime[39m[22m} (runtime: runtime) [1m[32mruntime.js[39m[22m (runtime) 8.7 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
+chunk {[1m[33mspec-0[39m[22m} (runtime: runtime) [1m[32mspec-0.js[39m[22m (spec-0) 605 bytes
+chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[22m, [1m[32mstyles.js[39m[22m (styles) 212 KiB (javascript) 0 bytes (css/mini-extract) [1m[33m[initial][39m[22m
+
+[1m[31mERROR[39m[22m in [91merror[0m[90m TS2688: [0mCannot find type definition file for 'cypress'.
+  The file is in the program because:
+    Entry point of type library 'cypress' specified in compilerOptions
+
+[1m[31mERROR[39m[22m in [96msrc/app/components/button/button-group.component.ts[0m:[93m47[0m:[93m74[0m - [91merror[0m[90m TS2769: [0mNo overload matches this call.
+  Overload 1 of 2, '(observerOrNext?: Partial<Observer<Direction>> | ((value: Direction) => void) | undefined): Subscription', gave the following error.
+    Argument of type '(direction: Event | RouterEvent) => void' is not assignable to parameter of type 'Partial<Observer<Direction>> | ((value: Direction) => void) | undefined'.
+      Type '(direction: Event | RouterEvent) => void' is not assignable to type '(value: Direction) => void'.
+        Types of parameters 'direction' and 'value' are incompatible.
+          Type 'string' is not assignable to type 'Event_2 | RouterEvent'.
+            Type 'string' is not assignable to type 'Event_2 | RouterEvent'.
+  Overload 2 of 2, '(next?: ((value: Direction) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription', gave the following error.
+    Argument of type '(direction: Event | RouterEvent) => void' is not assignable to parameter of type '(value: Direction) => void'.
+      Types of parameters 'direction' and 'value' are incompatible.
+        Type 'string' is not assignable to type 'Event_2 | RouterEvent'.
+
+[7m47[0m     this.directionality.change?.pipe(takeUntil(this.destroy$)).subscribe((direction: Event|RouterEvent) => {
+[7m  [0m [91m                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[1m[31mERROR[39m[22m in [96msrc/app/components/button/button-group.component.ts[0m:[93m48[0m:[93m18[0m - [91merror[0m[90m TS2352: [0mConversion of type 'Event_2 | RouterEvent' to type 'Direction' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type 'RouterEvent' is not comparable to type 'Direction'.
+
+[7m48[0m       this.dir = direction as Direction;
+[7m  [0m [91m                 ~~~~~~~~~~~~~~~~~~~~~~[0m
+
+[1m[31mERROR[39m[22m in [96msrc/app/components/button/button.component.ts[0m:[93m160[0m:[93m23[0m - [91merror[0m[90m TS2304: [0mCannot find name 'RouterEvent'.
+
+[7m160[0m       fromEvent<Event|RouterEvent>(this.elementRef.nativeElement, 'click', {
+[7m   [0m [91m                      ~~~~~~~~~~~[0m
+
+2023-09-12 [1m15:22:29[39m[22m: webpack compiled in 7424 ms (aa15b19dcec7d39d)
 
 ====================================================================================================
 
@@ -20,66 +69,13 @@
 ────────────────────────────────────────────────────────────────────────────────────────────────────
                                                                                                     
   Running:  app.cy.ts                                                                       (1 of 1)
-asset [1m[32mcypress-support-file.js[39m[22m 14.4 MiB {[1m[33mcypress-support-file[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-support-file)
-asset [1m[32mpolyfills.js[39m[22m 4.93 MiB {[1m[33mpolyfills[39m[22m} [1m[32m[emitted][39m[22m (name: polyfills)
-asset [1m[32mcypress-entry.js[39m[22m 748 KiB {[1m[33mcypress-entry[39m[22m} [1m[32m[emitted][39m[22m (name: cypress-entry)
-asset [1m[32mstyles.js[39m[22m 739 KiB {[1m[33mstyles[39m[22m} [1m[32m[emitted][39m[22m (name: styles)
-asset [1m[32mruntime.js[39m[22m 31.2 KiB {[1m[33mruntime[39m[22m} [1m[32m[emitted][39m[22m (name: runtime)
-asset [1m[32mspec-0.js[39m[22m 2.18 KiB {[1m[33mspec-0[39m[22m} [1m[32m[emitted][39m[22m (name: spec-0)
-asset [1m[32mstyles.css[39m[22m 1.1 KiB {[1m[33mstyles[39m[22m} [1m[32m[emitted][39m[22m (name: styles)
-asset [1m[32mindex.html[39m[22m 645 bytes [1m[32m[emitted][39m[22m
-Entrypoint [1mpolyfills[39m[22m 4.96 MiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mpolyfills.js[39m[22m 4.93 MiB
-Entrypoint [1mcypress-entry[39m[22m 779 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mcypress-entry.js[39m[22m 748 KiB
-Entrypoint [1mstyles[39m[22m 771 KiB = [1m[32mruntime.js[39m[22m 31.2 KiB [1m[32mstyles.css[39m[22m 1.1 KiB [1m[32mstyles.js[39m[22m 739 KiB
-chunk {[1m[33mcypress-entry[39m[22m} (runtime: runtime) [1m[32mcypress-entry.js[39m[22m (cypress-entry) 214 KiB [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
-chunk {[1m[33mcypress-support-file[39m[22m} (runtime: runtime) [1m[32mcypress-support-file.js[39m[22m (cypress-support-file) 4.05 MiB [1m[32m[rendered][39m[22m
-chunk {[1m[33mpolyfills[39m[22m} (runtime: runtime) [1m[32mpolyfills.js[39m[22m (polyfills) 1.31 MiB [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
-chunk {[1m[33mruntime[39m[22m} (runtime: runtime) [1m[32mruntime.js[39m[22m (runtime) 8.7 KiB [1m[33m[entry][39m[22m [1m[32m[rendered][39m[22m
-chunk {[1m[33mspec-0[39m[22m} (runtime: runtime) [1m[32mspec-0.js[39m[22m (spec-0) 605 bytes [1m[32m[rendered][39m[22m
-chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[22m, [1m[32mstyles.js[39m[22m (styles) 212 KiB (javascript) 0 bytes (css/mini-extract) [1m[33m[initial][39m[22m [1m[32m[rendered][39m[22m
-
-[1m[31mERROR[39m[22m in [91merror[0m[90m TS2688: [0mCannot find type definition file for 'cypress'.
-  The file is in the program because:
-    Entry point of type library 'cypress' specified in compilerOptions
-
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button.component.ts[0m:[93m26[0m:[93m39[0m - [91merror[0m[90m TS2307: [0mCannot find module './config' or its corresponding type declarations.
-
-[7m26[0m import { NZ_CONFIG_MODULE_NAME } from './config';
-[7m  [0m [91m                                      ~~~~~~~~~~[0m
-
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button.component.ts[0m:[93m27[0m:[93m33[0m - [91merror[0m[90m TS2307: [0mCannot find module './config/config.service' or its corresponding type declarations.
-
-[7m27[0m import { NzConfigService } from './config/config.service';
-[7m  [0m [91m                                ~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button.component.ts[0m:[93m168[0m:[93m18[0m - [91merror[0m[90m TS2551: [0mProperty 'nzLoading' does not exist on type 'NzButtonComponent'. Did you mean 'loading$'?
-
-[7m168[0m             this.nzLoading
-[7m   [0m [91m                 ~~~~~~~~~[0m
-
-  [96msrc/app/components/button/button.component.ts[0m:[93m91[0m:[93m11[0m
-    [7m91[0m   private loading$ = new Subject<boolean>();
-    [7m  [0m [96m          ~~~~~~~~[0m
-    'loading$' is declared here.
-
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button.component.ts[0m:[93m180[0m:[93m31[0m - [91merror[0m[90m TS2551: [0mProperty 'nzLoading' does not exist on type 'NzButtonComponent'. Did you mean 'loading$'?
-
-[7m180[0m       this.loading$.next(this.nzLoading);
-[7m   [0m [91m                              ~~~~~~~~~[0m
-
-  [96msrc/app/components/button/button.component.ts[0m:[93m91[0m:[93m11[0m
-    [7m91[0m   private loading$ = new Subject<boolean>();
-    [7m  [0m [96m          ~~~~~~~~[0m
-    'loading$' is declared here.
-
-2023-09-11 [1m17:23:40[39m[22m: webpack compiled in 42331 ms (994d00f54ffac3ab)
 
 
   My First Test
-    √ Does not do much! (80ms)
+    √ Does not do much! (48ms)
 
 
-  1 passing (126ms)
+  1 passing (85ms)
 
 
   (Results)
@@ -100,7 +96,7 @@ chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[2
   (Video)
 
   -  Started compressing: Compressing to 32 CRF                                                     
-  -  Finished compressing: 4 seconds                                                 
+  -  Finished compressing: 0 seconds                                                 
 
   -  Video output: C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\cypress\videos\app.cy.ts.mp4
 
@@ -112,7 +108,7 @@ chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[2
 
        Spec                                              Tests  Passing  Failing  Pending  Skipped  
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ √  app.cy.ts                                118ms        1        1        -        -        - │
+  │ √  app.cy.ts                                 79ms        1        1        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    √  All specs passed!                        118ms        1        1        -        -        -  
+    √  All specs passed!                         79ms        1        1        -        -        -  
 

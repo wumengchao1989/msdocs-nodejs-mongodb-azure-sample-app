@@ -316,14 +316,17 @@ const demoDescription = [
   .join("\n");
 
 async function send_request(req, res) {
-  const { prompt, is_init, chatGroupId } = req.body;
+  const { prompt, is_init, chatGroupId, role } = req.body;
   const roleDescription = roleDescriptionMap["1"];
   const conversionInfoInit = [
-    { role: roleMap.system, content: roleDescription },
+    { role: roleMap.user, content: roleDescription },
     {
       role: roleMap.user,
-      content:
-        "Hello, tell me who are you, what is Panda Design and list what you can do to help user use Panda Design",
+      content: `Hello, I am a ${
+        role ? role : ""
+      }, and tell me who are you, what is Panda Design and list what you can do to help  ${
+        role ? role : ""
+      } use Panda Design`,
     },
   ];
   const currentChatGroup = await chatGroups.findById(chatGroupId);
@@ -340,7 +343,6 @@ async function send_request(req, res) {
         azure_chat_deployment_name,
         conversionInfoInit
       );
-
       currentChatGroup.chatMessages.push({
         role: roleMap.assistant,
         message: completion?.choices?.[0].message.content,
