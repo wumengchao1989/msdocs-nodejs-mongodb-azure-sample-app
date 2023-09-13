@@ -42,7 +42,7 @@ jobs:
 
     steps:
       - name: Install git
-        run: sudo apt-get git-all
+        run: sudo apt-get install git-all
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
