@@ -1,0 +1,14 @@
+
+> angularapp@0.0.0 build
+> ng build
+
+
+Initial Chunk Files           | Names         |  Raw Size | Estimated Transfer Size
+main.99b9f85043a7ece6.js      | main          | 238.05 kB |                63.67 kB
+polyfills.2230dc3bfb459c86.js | polyfills     |  33.02 kB |                10.63 kB
+runtime.2d99e508040b4ce1.js   | runtime       | 898 bytes |               518 bytes
+styles.ef46db3751d8e999.css   | styles        |   0 bytes |                       -
+
+| Initial Total | 271.95 kB |                74.80 kB
+
+Build at: 2023-09-12T14:15:33.085Z - Hash: 5d1dd66184095f3d - Time: 17598ms

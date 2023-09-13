@@ -25,33 +25,7 @@ chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[2
   The file is in the program because:
     Entry point of type library 'cypress' specified in compilerOptions
 
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button-group.component.ts[0m:[93m47[0m:[93m74[0m - [91merror[0m[90m TS2769: [0mNo overload matches this call.
-  Overload 1 of 2, '(observerOrNext?: Partial<Observer<Direction>> | ((value: Direction) => void) | undefined): Subscription', gave the following error.
-    Argument of type '(direction: Event | RouterEvent) => void' is not assignable to parameter of type 'Partial<Observer<Direction>> | ((value: Direction) => void) | undefined'.
-      Type '(direction: Event | RouterEvent) => void' is not assignable to type '(value: Direction) => void'.
-        Types of parameters 'direction' and 'value' are incompatible.
-          Type 'string' is not assignable to type 'Event_2 | RouterEvent'.
-            Type 'string' is not assignable to type 'Event_2 | RouterEvent'.
-  Overload 2 of 2, '(next?: ((value: Direction) => void) | null | undefined, error?: ((error: any) => void) | null | undefined, complete?: (() => void) | null | undefined): Subscription', gave the following error.
-    Argument of type '(direction: Event | RouterEvent) => void' is not assignable to parameter of type '(value: Direction) => void'.
-      Types of parameters 'direction' and 'value' are incompatible.
-        Type 'string' is not assignable to type 'Event_2 | RouterEvent'.
-
-[7m47[0m     this.directionality.change?.pipe(takeUntil(this.destroy$)).subscribe((direction: Event|RouterEvent) => {
-[7m  [0m [91m                                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
-
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button-group.component.ts[0m:[93m48[0m:[93m18[0m - [91merror[0m[90m TS2352: [0mConversion of type 'Event_2 | RouterEvent' to type 'Direction' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
-  Type 'RouterEvent' is not comparable to type 'Direction'.
-
-[7m48[0m       this.dir = direction as Direction;
-[7m  [0m [91m                 ~~~~~~~~~~~~~~~~~~~~~~[0m
-
-[1m[31mERROR[39m[22m in [96msrc/app/components/button/button.component.ts[0m:[93m160[0m:[93m23[0m - [91merror[0m[90m TS2304: [0mCannot find name 'RouterEvent'.
-
-[7m160[0m       fromEvent<Event|RouterEvent>(this.elementRef.nativeElement, 'click', {
-[7m   [0m [91m                      ~~~~~~~~~~~[0m
-
-2023-09-12 [1m15:22:29[39m[22m: webpack compiled in 7424 ms (aa15b19dcec7d39d)
+2023-09-12 [1m22:16:05[39m[22m: webpack compiled in 7550 ms (dd4ecfce76298e68)
 
 ====================================================================================================
 
@@ -72,10 +46,10 @@ chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[2
 
 
   My First Test
-    √ Does not do much! (48ms)
+    √ Does not do much! (53ms)
 
 
-  1 passing (85ms)
+  1 passing (88ms)
 
 
   (Results)
@@ -96,7 +70,7 @@ chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[2
   (Video)
 
   -  Started compressing: Compressing to 32 CRF                                                     
-  -  Finished compressing: 0 seconds                                                 
+  -  Finished compressing: 1 second                                                  
 
   -  Video output: C:\Users\wumen\Documents\msdocs-nodejs-mongodb-azure-sample-app\project\cypress\videos\app.cy.ts.mp4
 
@@ -108,7 +82,7 @@ chunk {[1m[33mstyles[39m[22m} (runtime: runtime) [1m[32mstyles.css[39m[2
 
        Spec                                              Tests  Passing  Failing  Pending  Skipped  
   ┌────────────────────────────────────────────────────────────────────────────────────────────────┐
-  │ √  app.cy.ts                                 79ms        1        1        -        -        - │
+  │ √  app.cy.ts                                 85ms        1        1        -        -        - │
   └────────────────────────────────────────────────────────────────────────────────────────────────┘
-    √  All specs passed!                         79ms        1        1        -        -        -  
+    √  All specs passed!                         85ms        1        1        -        -        -  
 
