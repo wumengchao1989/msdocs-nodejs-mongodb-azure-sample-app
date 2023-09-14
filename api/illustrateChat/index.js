@@ -25,7 +25,7 @@ async function addIllustrateChatGroups(req, res) {
 }
 
 async function sendIllustrateMessage(req, res) {
-  const { id, bolbUrl, bolbName, isInit } = req.body;
+  const { bolbName } = req.body;
   await speechToText(bolbName);
   res.json({
     success: true,

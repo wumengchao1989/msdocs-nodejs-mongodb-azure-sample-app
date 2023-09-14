@@ -15,7 +15,7 @@ const { roleMap, roleDescriptionMap } = require("../../utils/constants");
 const { textToSpeech } = require("../text2speech");
 
 speechConfig.speechRecognitionLanguage = "en-US";
-async function speechToText(blobName, chatGroupId) {
+async function speechToText(blobName) {
   const savepath = path.resolve(`./audioDownloaded/${blobName}`);
   const blobClient = containerClient.getBlobClient(blobName);
   await blobClient.downloadToFile(savepath);
@@ -24,13 +24,10 @@ async function speechToText(blobName, chatGroupId) {
   let speechRecognizer = new sdk.SpeechRecognizer(speechConfig, audioConfig);
   speechRecognizer.recognizeOnceAsync(
     async (result) => {
-      console.log(result);
       if (result.privText) {
         const currentChatGroup = await illustrateChatGroups.findById(
           "64ffef6ece40662d8a3069c7"
         );
-        console.log(currentChatGroup);
-
         if (currentChatGroup) {
           const message = {
             message: result.privText,
@@ -73,8 +70,11 @@ async function speechToText(blobName, chatGroupId) {
             bolbName: blobName,
           };
           currentChatGroup.chatMessages.push(responseMessage);
+          await textToSpeech(
+            completion?.choices?.[0].message.content,
+            blobName
+          );
           await currentChatGroup.save();
-          textToSpeech(completion?.choices?.[0].message.content, blobName);
         }
       }
       speechRecognizer.close();
