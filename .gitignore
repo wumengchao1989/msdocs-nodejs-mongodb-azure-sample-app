@@ -351,3 +351,5 @@ MigrationBackup/
 
 .env
 .angular
+audioDownloaded
+public/audio
