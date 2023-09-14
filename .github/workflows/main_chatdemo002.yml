@@ -41,8 +41,10 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
+      - name: apt-update
+        run: sudo apt update
       - name: Install git
-        run: sudo apt-get install git-all
+        run: sudo apt-get install git
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
